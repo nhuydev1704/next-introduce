@@ -3,10 +3,15 @@ import Head from 'next/head';
 import Image from 'next/image';
 import hero from '@images/hero.png';
 import React from 'react';
+import AxiosClient from 'apis/axiosClient';
+import useCallContext from 'hooks/useCallContext';
 
 export default function Home() {
+    const { state } = useCallContext();
+    console.log('🚀 ~ file: index.tsx ~ line 11 ~ Home ~ state', state);
+
     React.useLayoutEffect(() => {
-        document.documentElement.classList.add('dark');
+        document.documentElement.classList.add('light');
     }, []);
 
     return (
