@@ -1,9 +1,10 @@
-import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { ContextProvider } from 'context/store';
 import useCallContext from 'hooks/useCallContext';
 import React from 'react';
 import AxiosClient from 'apis/axiosClient';
+import 'antd/dist/reset.css';
+import '../styles/globals.css';
 
 export default function App({ Component, pageProps }: AppProps) {
     return (
