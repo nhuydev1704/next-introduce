@@ -6,6 +6,32 @@ const homeSchema = new mongoose.Schema(
             type: String,
             trim: true,
         },
+        description_banner: {
+            type: String,
+            trim: true,
+        },
+        title_left_section1: {
+            type: String,
+            trim: true,
+        },
+        description_left_section1: {
+            type: String,
+            trim: true,
+        },
+        feature_left_section1: {
+            type: Array,
+        },
+        title_right_section1: {
+            type: String,
+            trim: true,
+        },
+        description_right_section1: {
+            type: String,
+            trim: true,
+        },
+        feature_right_section1: {
+            type: Array,
+        },
     },
     {
         timestamps: true,
