@@ -8,13 +8,15 @@ import { Typography } from 'antd';
 import useCallContext from 'hooks/useCallContext';
 import LayoutComponent from 'layout';
 import React from 'react';
+import { adminService } from './service';
 
 export default function AdminHome() {
     const { state } = useCallContext();
+
     const [editableStr, setEditableStr] = React.useState(state?.home?.title_banner);
     const [editableStrDesBanner, setEditableStrDesBanner] = React.useState(state?.home?.description_banner);
 
-    React.useLayoutEffect(() => {
+    React.useEffect(() => {
         document.documentElement.classList.add('light');
     }, []);
 
@@ -31,14 +33,24 @@ export default function AdminHome() {
                         <Typography.Paragraph
                             style={{ marginBottom: '20px' }}
                             className="max-w-2xl text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white pr-4 pb-0"
-                            editable={{ onChange: setEditableStr }}
+                            editable={{
+                                onChange: (value: any) => {
+                                    setEditableStr(value);
+                                    adminService.updateHome({ _id: state?.home?._id, title_banner: value });
+                                },
+                            }}
                         >
                             {editableStr}
                         </Typography.Paragraph>
 
                         <Typography.Paragraph
                             className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"
-                            editable={{ onChange: setEditableStrDesBanner }}
+                            editable={{
+                                onChange: (value: any) => {
+                                    setEditableStrDesBanner(value);
+                                    adminService.updateHome({ _id: state?.home?._id, description_banner: value });
+                                },
+                            }}
                         >
                             {editableStrDesBanner}
                         </Typography.Paragraph>

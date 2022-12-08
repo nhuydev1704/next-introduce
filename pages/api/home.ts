@@ -9,12 +9,26 @@ export default async (req: NextApiRequest, res: NextApiResponse<any>) => {
         case 'GET':
             await getHome(req, res);
             break;
+        case 'PUT':
+            await updateHome(req, res);
+            break;
     }
 };
 
 const getHome = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         const home_page = await home.findOne();
+
+        res.json({ home: home_page });
+    } catch (err: any) {
+        return res.status(500).json({ err: err.message });
+    }
+};
+
+// update Home
+export const updateHome = async (req: NextApiRequest, res: NextApiResponse) => {
+    try {
+        const home_page = await home.findOneAndUpdate({ _id: req?.body?._id }, req?.body);
 
         res.json({ home: home_page });
     } catch (err: any) {

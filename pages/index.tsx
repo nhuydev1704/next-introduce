@@ -11,7 +11,7 @@ import React from 'react';
 export default function Home() {
     const { state } = useCallContext();
 
-    React.useLayoutEffect(() => {
+    React.useEffect(() => {
         document.documentElement.classList.add('light');
     }, []);
 
