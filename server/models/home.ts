@@ -10,6 +10,9 @@ const homeSchema = new mongoose.Schema(
             type: String,
             trim: true,
         },
+        image_banner: {
+            type: String,
+        },
         title_left_section1: {
             type: String,
             trim: true,
@@ -31,6 +34,12 @@ const homeSchema = new mongoose.Schema(
         },
         feature_right_section1: {
             type: Array,
+        },
+        image_left_section1: {
+            type: String,
+        },
+        image_right_section1: {
+            type: String,
         },
     },
     {

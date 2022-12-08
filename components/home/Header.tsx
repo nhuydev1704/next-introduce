@@ -3,7 +3,7 @@ import logo from '@images/logo.svg';
 
 const Header = () => {
     return (
-        <header className="fixed w-full shadow-md">
+        <header className="fixed w-full shadow-md z-50">
             <nav className="bg-white border-gray-200 py-5 dark:bg-gray-900">
                 <div className="flex flex-wrap items-center justify-between max-w-screen-2xl px-4 mx-auto">
                     <a href="#" className="flex items-center">

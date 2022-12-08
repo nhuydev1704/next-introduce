@@ -3,8 +3,9 @@ import { ContextProvider } from 'context/store';
 import useCallContext from 'hooks/useCallContext';
 import React from 'react';
 import AxiosClient from 'apis/axiosClient';
-import 'antd/dist/reset.css';
+
 import '../styles/globals.css';
+import 'antd/dist/reset.css';
 
 export default function App({ Component, pageProps }: AppProps) {
     return (

@@ -1,85 +1,157 @@
-import Header from '@components/home/Header';
-import Section1 from '@components/home/Section1';
-import Section2 from '@components/home/Section2';
-import Section3 from '@components/home/Section3';
-import Section4 from '@components/home/Section4';
-import hero from '@images/hero.png';
-import { Typography } from 'antd';
+import UploadComponent from '@components/Upload';
+import { Button, Card, Col, Form, Input, Row } from 'antd';
 import useCallContext from 'hooks/useCallContext';
 import LayoutComponent from 'layout';
 import React from 'react';
-import { adminService } from './service';
 
 export default function AdminHome() {
     const { state } = useCallContext();
+    const bannerImage = React.useRef<any>(null);
+    const sectionLeft1 = React.useRef<any>(null);
+    const sectionRight1 = React.useRef<any>(null);
 
-    const [editableStr, setEditableStr] = React.useState(state?.home?.title_banner);
-    const [editableStrDesBanner, setEditableStrDesBanner] = React.useState(state?.home?.description_banner);
-
-    React.useEffect(() => {
-        document.documentElement.classList.add('light');
-    }, []);
+    const [form] = Form.useForm();
 
     React.useEffect(() => {
-        setEditableStr(state?.home?.title_banner);
-        setEditableStrDesBanner(state?.home?.description_banner);
+        form.setFieldsValue({ ...state?.home });
+        bannerImage.current = [{ url: state?.home?.image_banner, uid: Math.random(), name: 'demo' }];
+        sectionLeft1.current = [{ url: state?.home?.image_left_section1, uid: Math.random(), name: 'demo' }];
+        sectionRight1.current = [{ url: state?.home?.image_right_section1, uid: Math.random(), name: 'demo' }];
     }, [state?.home]);
 
     return (
         <LayoutComponent>
-            <section className="bg-white dark:bg-gray-900">
-                <div className="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
-                    <div className="mr-auto place-self-center lg:col-span-7">
-                        <Typography.Paragraph
-                            style={{ marginBottom: '20px' }}
-                            className="max-w-2xl text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white pr-4 pb-0"
-                            editable={{
-                                onChange: (value: any) => {
-                                    setEditableStr(value);
-                                    adminService.updateHome({ _id: state?.home?._id, title_banner: value });
-                                },
-                            }}
+            <section className="bg-gray-100 dark:bg-gray-900">
+                <div className="max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:py-16 lg:pt-28">
+                    <Form form={form} layout="vertical" onFinish={(values) => console.log(values)}>
+                        <Card
+                            extra={
+                                <Button
+                                    htmlType="submit"
+                                    type="primary"
+                                    className="my-3"
+                                    style={{ backgroundColor: 'rgb(37 99 235)' }}
+                                >
+                                    Cập nhật
+                                </Button>
+                            }
+                            style={{ width: '100%' }}
                         >
-                            {editableStr}
-                        </Typography.Paragraph>
-
-                        <Typography.Paragraph
-                            className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"
-                            editable={{
-                                onChange: (value: any) => {
-                                    setEditableStrDesBanner(value);
-                                    adminService.updateHome({ _id: state?.home?._id, description_banner: value });
-                                },
-                            }}
-                        >
-                            {editableStrDesBanner}
-                        </Typography.Paragraph>
-                    </div>
-                    <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                        <img src={hero.src} alt="hero image" />
-                    </div>
-                </div>
-            </section>
-            <Section1 />
-            <Section2 />
-            <Section3 />
-            <Section4 />
-            <section className="bg-gray-50 dark:bg-gray-800">
-                <div className="max-w-screen-xl px-4 py-8 mx-auto lg:py-16 lg:px-6">
-                    <div className="max-w-screen-sm mx-auto text-center">
-                        <h2 className="mb-4 text-3xl font-extrabold leading-tight tracking-tight text-gray-900 dark:text-white">
-                            Start your free trial today
-                        </h2>
-                        <p className="mb-6 font-light text-gray-500 dark:text-gray-400 md:text-lg">
-                            Try Landwind Platform for 30 days. No credit card required.
-                        </p>
-                        <a
-                            href="#"
-                            className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800"
-                        >
-                            Free trial for 30 days
-                        </a>
-                    </div>
+                            <Card style={{ width: '100%' }}>
+                                <Row style={{ width: '100%' }}>
+                                    <Col span={16}>
+                                        <Form.Item name="title_banner" label="Tiêu đề banner">
+                                            <Input />
+                                        </Form.Item>
+                                        <Form.Item name="description_banner" label="Mô tả banner">
+                                            <Input.TextArea rows={4} />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col
+                                        span={8}
+                                        style={{
+                                            width: '100%',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            padding: '60px',
+                                        }}
+                                    >
+                                        <Form.Item name="image_banner" label="Ảnh banner">
+                                            {bannerImage.current && (
+                                                <UploadComponent
+                                                    isUploadServerWhenUploading
+                                                    initialFile={bannerImage.current}
+                                                    uploadType="list"
+                                                    listType="picture-card"
+                                                    maxLength={1}
+                                                    onSuccessUpload={(url: any) => {
+                                                        console.log('🚀 ~ file: home.tsx:63 ~ AdminHome ~ url', url);
+                                                        url && form.setFieldsValue({ image_banner: url.public_url });
+                                                    }}
+                                                />
+                                            )}
+                                        </Form.Item>
+                                    </Col>
+                                </Row>
+                            </Card>
+                            <Card style={{ width: '100%', marginTop: '20px' }}>
+                                <Row style={{ width: '100%' }}>
+                                    <Col span={16}>
+                                        <Form.Item name="title_left_section1" label="Tiêu đề section trái">
+                                            <Input />
+                                        </Form.Item>
+                                        <Form.Item name="description_left_section1" label="Mô tả section trái">
+                                            <Input.TextArea rows={4} />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col
+                                        span={8}
+                                        style={{
+                                            width: '100%',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            padding: '60px',
+                                        }}
+                                    >
+                                        <Form.Item name="image_left_section1" label="Ảnh section trái">
+                                            {sectionLeft1.current && (
+                                                <UploadComponent
+                                                    isUploadServerWhenUploading
+                                                    initialFile={sectionLeft1.current}
+                                                    uploadType="list"
+                                                    listType="picture-card"
+                                                    maxLength={1}
+                                                    onSuccessUpload={(url: any) => {
+                                                        url &&
+                                                            form.setFieldsValue({
+                                                                image_left_section1: url.public_url,
+                                                            });
+                                                    }}
+                                                />
+                                            )}
+                                        </Form.Item>
+                                    </Col>
+                                </Row>
+                                <Row style={{ width: '100%' }}>
+                                    <Col span={16}>
+                                        <Form.Item name="title_right_section1" label="Tiêu đề section phải">
+                                            <Input />
+                                        </Form.Item>
+                                        <Form.Item name="description_right_section1" label="Mô tả section phải">
+                                            <Input.TextArea rows={4} />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col
+                                        span={8}
+                                        style={{
+                                            width: '100%',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            padding: '60px',
+                                        }}
+                                    >
+                                        <Form.Item name="image_right_section1" label="Ảnh section phải">
+                                            {sectionRight1.current && (
+                                                <UploadComponent
+                                                    isUploadServerWhenUploading
+                                                    initialFile={sectionRight1.current}
+                                                    uploadType="list"
+                                                    listType="picture-card"
+                                                    maxLength={1}
+                                                    onSuccessUpload={(url: any) => {
+                                                        url &&
+                                                            form.setFieldsValue({
+                                                                image_right_section1: url.public_url,
+                                                            });
+                                                    }}
+                                                />
+                                            )}
+                                        </Form.Item>
+                                    </Col>
+                                </Row>
+                            </Card>
+                        </Card>
+                    </Form>
                 </div>
             </section>
         </LayoutComponent>
