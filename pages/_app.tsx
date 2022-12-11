@@ -7,6 +7,12 @@ import AxiosClient from 'apis/axiosClient';
 import '../styles/globals.css';
 import 'antd/dist/reset.css';
 
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+
 export default function App({ Component, pageProps }: AppProps) {
     return (
         <ContextProvider>
