@@ -5,21 +5,26 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 const Section2 = () => {
     return (
-        <section className="bg-white dark:bg-gray-900">
-            <div className="select-none items-center max-w-screen-xl px-4 py-8 mx-auto lg:py-24 lg:px-6">
+        <section className="bg-slate-300">
+            <div className="text-white pt-8">
+                <h1 className="text-center text-2xl">-- THÀNH TỰU --</h1>
+                <h2 className="text-center text-2xl">THÀNH TỰU CỦA CHÚNG TÔI</h2>
+            </div>
+            <div className="select-none items-center max-w-screen-xl px-4 py-8 mx-auto lg:pb-16 lg:px-6">
                 <Swiper
                     effect={'coverflow'}
-                    grabCursor={true}
-                    centeredSlides={true}
+                    grabCursor
+                    centeredSlides
                     slidesPerView={'auto'}
                     coverflowEffect={{
                         rotate: 10,
-                        stretch: 0,
+                        stretch: -40,
                         depth: 100,
                         modifier: 1,
                         slideShadows: true,
                     }}
-                    pagination={true}
+                    initialSlide={4}
+                    pagination
                     modules={[EffectCoverflow, Pagination]}
                     className="mySwiper"
                 >
