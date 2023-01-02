@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 const Section2 = () => {
     return (
         <section className="bg-slate-300">
-            <div className="text-white pt-8">
+            <div className="pt-8">
                 <h1 className="text-center text-2xl">-- THÀNH TỰU --</h1>
                 <h2 className="text-center text-2xl">THÀNH TỰU CỦA CHÚNG TÔI</h2>
             </div>
