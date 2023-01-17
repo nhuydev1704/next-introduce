@@ -1,33 +1,6 @@
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
-import tinymce from 'tinymce/tinymce';
-// Theme
-import 'tinymce/themes/silver';
-// Toolbar icons
-import 'tinymce/icons/default';
-// Editor styles
-import 'tinymce/skins/ui/oxide/skin.min.css';
-
-// importing the plugin js.
-import 'tinymce/plugins/advlist';
-import 'tinymce/plugins/autolink';
-import 'tinymce/plugins/link';
-import 'tinymce/plugins/image';
-import 'tinymce/plugins/lists';
-import 'tinymce/plugins/charmap';
-import 'tinymce/plugins/anchor';
-import 'tinymce/plugins/searchreplace';
-import 'tinymce/plugins/wordcount';
-import 'tinymce/plugins/code';
-import 'tinymce/plugins/fullscreen';
-import 'tinymce/plugins/insertdatetime';
-import 'tinymce/plugins/media';
-import 'tinymce/plugins/nonbreaking';
-import 'tinymce/plugins/table';
-import 'tinymce/plugins/template';
-import 'tinymce/plugins/help';
-
 const checkImage = (file: File) => {
     const types = ['image/png', 'image/jpeg'];
     let err = '';
@@ -66,7 +39,7 @@ const NewsEditor = () => {
     // }, [refContent]);
 
     return (
-        <>
+        <div className="pt-[80px]">
             <input id="my-file-upload" accept="image/*" type="file" name="my-file-upload" style={{ display: 'none' }} />
             <Editor
                 // disabled={disabled}
@@ -105,7 +78,7 @@ const NewsEditor = () => {
                     default_link_target: '_blank',
                     entity_encoding: 'raw',
                     menubar: true,
-                    statubar: true,
+                    statusbar: true,
                     branding: false,
                     // file_picker_callback: async function (callback, value, meta) {
                     //     if (meta?.filetype === 'image') {
@@ -138,7 +111,7 @@ const NewsEditor = () => {
                     // },
                 }}
             />
-        </>
+        </div>
     );
 };
 

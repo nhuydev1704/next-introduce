@@ -65,7 +65,6 @@ export default function AdminHome() {
                                                     listType="picture-card"
                                                     maxLength={1}
                                                     onSuccessUpload={(url: any) => {
-                                                        console.log('🚀 ~ file: home.tsx:63 ~ AdminHome ~ url', url);
                                                         url && form.setFieldsValue({ image_banner: url.public_url });
                                                     }}
                                                 />
