@@ -1,8 +1,15 @@
 import React from 'react';
 import logo from '@images/logo.svg';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+
+const NAV_STYLE =
+    'block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 ';
 
 const Header = () => {
+    const { pathname } = useRouter();
+    console.log('🚀 ~ file: Header.tsx:8 ~ Header ~ pathname', pathname);
+
     return (
         <header className="fixed w-full shadow-md z-50">
             <nav className="bg-white border-gray-200 py-5 dark:bg-gray-900">
@@ -52,21 +59,21 @@ const Header = () => {
                             id="mobile-menu-2"
                         >
                             <ul className="flex flex-col font-medium lg:flex-row lg:space-x-8 lg:mt-0 mb-0">
-                                <li className="block py-2 pl-3 pr-4 text-white bg-purple-700 rounded lg:bg-transparent lg:text-purple-700 lg:p-0 dark:text-white">
+                                <li className={NAV_STYLE + (pathname === '/' ? 'text-purple-700' : '')}>
                                     <Link href="/" aria-current="page">
                                         Trang chủ
                                     </Link>
                                 </li>
-                                <li className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                                <li className={NAV_STYLE + (pathname.includes('/introduce') ? 'text-purple-700' : '')}>
                                     <Link href="/introduce">Giới thiệu</Link>
                                 </li>
-                                <li className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                                <li className={NAV_STYLE + (pathname.includes('/products') ? 'text-purple-700' : '')}>
                                     <Link href="/products">Sản phẩm</Link>
                                 </li>
-                                <li className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
-                                    <Link href="/link">Tin tức</Link>
+                                <li className={NAV_STYLE + (pathname.includes('/news') ? 'text-purple-700' : '')}>
+                                    <Link href="/news">Tin tức</Link>
                                 </li>
-                                <li className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                                <li className={NAV_STYLE + (pathname.includes('/contact') ? 'text-purple-700' : '')}>
                                     <Link href="/contact">Liên hệ</Link>
                                 </li>
                             </ul>

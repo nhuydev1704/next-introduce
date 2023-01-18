@@ -9,7 +9,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<any>) => {
         case 'GET':
             await getHome(req, res);
             break;
-        case 'PUT':
+        case 'PATCH':
             await updateHome(req, res);
             break;
     }

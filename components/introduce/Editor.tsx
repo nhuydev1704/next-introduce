@@ -24,7 +24,7 @@ const NewsEditor = ({
     handleCallbackContent: (value: string) => void;
 }) => {
     const [content, setContent] = React.useState('');
-    const debounceContent = useDebounce(content, 1200);
+    const debounceContent = useDebounce(content, 300);
 
     React.useEffect(() => {
         handleCallbackContent(debounceContent);
