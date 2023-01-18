@@ -1,5 +1,6 @@
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
+import useDebounce from 'hooks/useDebounce';
 
 const checkImage = (file: File) => {
     const types = ['image/png', 'image/jpeg'];
@@ -13,41 +14,36 @@ const checkImage = (file: File) => {
     return err;
 };
 
-// {
-//     disabled,
-//     handleCallbackContent,
-//     refContent,
-//     handleCallbackContentNotDebounce,
-// }: {
-//     disabled?: boolean;
-//     refContent: any;
-//     handleCallbackContent: (value: string) => void;
-//     handleCallbackContentNotDebounce: (value: string) => void;
-// }
-
-const NewsEditor = () => {
+const NewsEditor = ({
+    disabled,
+    handleCallbackContent,
+    refContent,
+}: {
+    disabled?: boolean;
+    refContent: any;
+    handleCallbackContent: (value: string) => void;
+}) => {
     const [content, setContent] = React.useState('');
-    // const debounceContent = useDebounce(content, 300);
+    const debounceContent = useDebounce(content, 1200);
 
-    // React.useEffect(() => {
-    //     handleCallbackContent(debounceContent);
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [debounceContent]);
+    React.useEffect(() => {
+        handleCallbackContent(debounceContent);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [debounceContent]);
 
-    // React.useEffect(() => {
-    //     setContent(refContent);
-    // }, [refContent]);
+    React.useEffect(() => {
+        setContent(refContent);
+    }, [refContent]);
 
     return (
-        <div className="pt-[80px]">
+        <div className="pt-2">
             <input id="my-file-upload" accept="image/*" type="file" name="my-file-upload" style={{ display: 'none' }} />
             <Editor
                 // disabled={disabled}
                 value={content}
-                // onEditorChange={(ct) => {
-                //     setContent(ct);
-                //     handleCallbackContentNotDebounce(ct);
-                // }}
+                onEditorChange={(ct) => {
+                    setContent(ct);
+                }}
                 apiKey="hjuz02bsvcykwi6ruki9xpuarsd6l8txzaouzknog6xef2w5"
                 init={{
                     placeholder: 'Nhập nôi dung tin tức ...',

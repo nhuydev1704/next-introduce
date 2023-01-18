@@ -41,6 +41,11 @@ const homeSchema = new mongoose.Schema(
         image_right_section1: {
             type: String,
         },
+
+        // introduce
+        introduce: {
+            type: String,
+        },
     },
     {
         timestamps: true,
