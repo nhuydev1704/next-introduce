@@ -65,16 +65,22 @@ const Header = () => {
                                     </Link>
                                 </li>
                                 <li className={NAV_STYLE + (pathname.includes('/introduce') ? 'text-purple-700' : '')}>
-                                    <Link href="/introduce">Giới thiệu</Link>
+                                    <Link href={pathname?.includes('admin') ? '/admin/introduce' : '/introduce'}>
+                                        Giới thiệu
+                                    </Link>
                                 </li>
                                 <li className={NAV_STYLE + (pathname.includes('/products') ? 'text-purple-700' : '')}>
-                                    <Link href="/products">Sản phẩm</Link>
+                                    <Link href={pathname?.includes('admin') ? '/admin/products' : '/products'}>
+                                        Sản phẩm
+                                    </Link>
                                 </li>
                                 <li className={NAV_STYLE + (pathname.includes('/news') ? 'text-purple-700' : '')}>
-                                    <Link href="/news">Tin tức</Link>
+                                    <Link href={pathname?.includes('admin') ? '/admin/news' : '/news'}>Tin tức</Link>
                                 </li>
                                 <li className={NAV_STYLE + (pathname.includes('/contact') ? 'text-purple-700' : '')}>
-                                    <Link href="/contact">Liên hệ</Link>
+                                    <Link href={pathname?.includes('admin') ? '/admin/contact' : '/contact'}>
+                                        Liên hệ
+                                    </Link>
                                 </li>
                             </ul>
                         </div>

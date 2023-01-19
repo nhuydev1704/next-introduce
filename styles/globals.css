@@ -29,3 +29,26 @@ body {
   display: block;
   width: 100%;
 }
+
+body {
+  overflow-y: overlay;
+}
+
+.editor_content ul, .editor_content ol {
+    display: block;
+    list-style: disc outside none;
+    margin: 1em 0;
+    padding: 0 0 0 40px;
+
+}
+
+.editor_content p, 
+.editor_content li {
+  line-height: 24px;
+
+}
+.editor_content p  {
+  margin-bottom: 0.6rem;
+}
+
+

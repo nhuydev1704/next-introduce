@@ -18,10 +18,12 @@ const NewsEditor = ({
     disabled,
     handleCallbackContent,
     refContent,
+    height = 680,
 }: {
     disabled?: boolean;
-    refContent: any;
+    refContent?: any;
     handleCallbackContent: (value: string) => void;
+    height?: number;
 }) => {
     const [content, setContent] = React.useState('');
     const debounceContent = useDebounce(content, 300);
@@ -46,8 +48,8 @@ const NewsEditor = ({
                 }}
                 apiKey="hjuz02bsvcykwi6ruki9xpuarsd6l8txzaouzknog6xef2w5"
                 init={{
-                    placeholder: 'Nhập nôi dung tin tức ...',
-                    height: 680,
+                    placeholder: 'Nhập nôi dung ...',
+                    height: height,
                     content_style: 'body { font-family:Quicksand,sans-serif; font-size:14px }',
                     plugins: [
                         'advlist',
